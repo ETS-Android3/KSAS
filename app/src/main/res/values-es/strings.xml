@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KSAS</string>
+    <string name="attach_phone">Coloca tu dispositivo en tu antebrazo como se muestra en la imagen.</string>
+    <string name="blocking_set_I_introduction">El set de bloqueos 1 es el primer set que aprende una persona que practica Kenpo Karate Americano. Aquí, hay un video mostrando el set. Si quieres recordar el set, mira el video. Cuando estés preparado para practicarlo, pulsa comenzar.</string>
+    <string name="select_a_set">Elige un set</string>
+    <string name="set_selection_question">¿Qué set quieres practicar hoy?</string>
+    <string name="use_as_wearable">Por favor, utiliza tu dispositivo como wearable mientras utilizas esta app.</string>
+    <string name="welcome">Bienvenido a KSAS.</string>
+    <string name="follow_instructions">Por favor, pon tus manos en tus caderas, con los puños cerrados y mirando hacia arriba. Pulsa start y sigue mis instrucciones.</string>
+    <string name="already_recording">Ya se están capturando datos.</string>
+    <string name="downward_outward_block">Por favor, ejecuta un bloqueo hacía abajo hacía fuera.</string>
+    <string name="error">Creo que algo salió mal, empecemos de nuevo.</string>
+    <string name="errors">errores.</string>
+    <string name="errors_commited">Has cometido</string>
+    <string name="finish_set">¡Enhorabuena! Has terminado el set.</string>
+    <string name="good_movement">Buen movimiento.</string>
+    <string name="great">Genial!</string>
+    <string name="inward_block">Por favor, ejecuta un bloqueo hacia adentro.</string>
+    <string name="no_recognized">No he detectado ningún movimiento, inténtalo de nuevo por favor.</string>
+    <string name="outward_extended_block">Por favor, ejecuta un bloqueo hacia fuera extendido.</string>
+    <string name="perfect">Perfecto!</string>
+    <string name="rear_elbow_block">Por favor, vuelve a la posición original a través de un bloqueo con el codo hacia atrás.</string>
+    <string name="sensormanager_not_instantiated">SensorManager no ha sido instanciado.</string>
+    <string name="thats_it">Eso es!</string>
+    <string name="upward_block">Por favor, ejecuta un bloqueo hacia arriba.</string>
+    <string name="wrong_movement">Ese no es el movimiento correcto! Vuelve a la posición original!</string>
+    <string name="error_loading_model">Error al cargar modelo tflite.</string>
+    <string name="language_initialization_failed">Error al inicializar el idioma.</string>
+    <string name="language_not_suported">El idioma no está soportado.</string>
+    <string name="how_to_wear_the_device">Como ponerse el dispositivo.</string>
+    <string name="let_s_start">Empecemos</string>
+    <string name="next">Siguiente</string>
+    <string name="blocking_set_1">Set de Bloqueos 1</string>
+    <string name="start">Start</string>
+    <string name="practice_set">Practicing Blocking Set I</string>
+</resources>

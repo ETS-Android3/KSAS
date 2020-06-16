@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">KSAS</string>
+    <string name="welcome">Welcome to KSAS</string>
+    <string name="use_as_wearable">Please, use your phone as a wearable while using this app.</string>
+    <string name="attach_phone">Attach your phone to your forearm as shown in the image.</string>
+    <string name="select_a_set">Select a Set</string>
+    <string name="set_selection_question">Which set are you going to practice today?</string>
+    <string name="blocking_set_I_introduction">Blocking set 1 is the first set learnt by a person who practices American Kenpo Karate. Here, there is a video showing the set. If you want to refresh the set, watch the video. When you are ready to practice the set, press start.</string>
+    <string name="follow_instructions">Please, put your hand in your hips, with the fist closed and looking upward. then press start and follow my instructions.</string>
+    <string name="great">Great!</string>
+    <string name="thats_it">That\'s it!</string>
+    <string name="perfect">¡Perfect!</string>
+    <string name="good_movement">Good Movement!</string>
+    <string name="finish_set">Congratulations! You have finished the set!</string>
+    <string name="no_recognized">I haven\'t recognized any movement, please, try again.</string>
+    <string name="wrong_movement">That\'s not the correct movement! Return to the previous position!</string>
+    <string name="error">I think something went wrong, let\'s start again!</string>
+    <string name="upward_block">Please, execute an upward block.</string>
+    <string name="inward_block">Please, execute an inward block.</string>
+    <string name="outward_extended_block">Please, execute an outward extended block.</string>
+    <string name="downward_outward_block">Please, execute an downward outward block.</string>
+    <string name="rear_elbow_block">Please, return to the original position with a rear elbow block.</string>
+    <string name="errors_commited">You have committed</string>
+    <string name="errors">errors.</string>
+    <string name="sensormanager_not_instantiated">SensorManager not instantiated.</string>
+    <string name="already_recording">Already recording data.</string>
+    <string name="language_not_suported">This language is not supported.</string>
+    <string name="language_initialization_failed">Language initialization Failed!</string>
+    <string name="error_loading_model">Error loading tflite model.</string>
+    <string name="how_to_wear_the_device">How to wear the device.</string>
+    <string name="blocking_set_1">Blocking Set 1</string>
+    <string name="let_s_start">Let\'s Start!</string>
+    <string name="next">Next</string>
+    <string name="start">Start</string>
+    <string name="practice_set">Practicing Blocking Set I</string>
+</resources>
