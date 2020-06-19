@@ -18,7 +18,7 @@ public class Mathematics {
             float[] newAttribute = new float[attribute.length];
             newAttribute[0] = attribute[0];
             for(float value : attribute){
-                float newValue = (0.1f * value) + (1-0.1f) * newAttribute[pos];
+                float newValue = (0.5f * value) + (1-0.5f) * newAttribute[pos];
                 if(pos+1 < array[0][0].length)
                     newAttribute[pos+1] = newValue;
                 pos++;
