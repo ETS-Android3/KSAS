@@ -77,6 +77,7 @@ public class Mathematics {
         for(int i=0; i < numbers[0].length; i++){
             if(numbers[0][i] > maxValue){
                 maxIndex = i;
+                maxValue = numbers[0][i];
             }
         }
         return maxIndex;
