@@ -9,6 +9,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -90,7 +91,7 @@ public class RecognizeInBackground extends AsyncTask<Void, Void, Boolean> implem
         // Initialize sensors info and sensor manager.
         this.sensorsInfo = new SensorsInfo();
         // Initialize sensor manager.
-        this.sensorManager=(SensorManager) this.activity.getSystemService(Context.SENSOR_SERVICE);
+        this.sensorManager = (SensorManager) this.activity.getSystemService(Context.SENSOR_SERVICE);
 
         // Initial values of movements.
         current_movement = Movements.NO_MOVEMENT;
@@ -99,6 +100,37 @@ public class RecognizeInBackground extends AsyncTask<Void, Void, Boolean> implem
 
         // When activity starts, it is not recording data.
         this.recordingData = false;
+
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null){
+            Log.i("SENSOR", "TYPE_ACCELEROMETER available.");
+        } else {
+            Log.e("SENSOR", "TYPE_ACCELEROMETER not available.");
+        }
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY) != null){
+            Log.i("SENSOR", "TYPE_GRAVITY available.");
+        } else {
+            Log.e("SENSOR", "TYPE_GRAVITY not available.");
+        }
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null){
+            Log.i("SENSOR", "TYPE_GYROSCOPE available.");
+        } else {
+            Log.e("SENSOR", "TYPE_GYROSCOPE not available.");
+        }
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION) != null){
+            Log.i("SENSOR", "TYPE_LINEAR_ACCELERATION available.");
+        } else {
+            Log.e("SENSOR", "TYPE_LINEAR_ACCELERATION not available.");
+        }
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR) != null){
+            Log.i("SENSOR", "TYPE_GAME_ROTATION_VECTOR available.");
+        } else {
+            Log.e("SENSOR", "TYPE_GAME_ROTATION_VECTOR not available.");
+        }
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null){
+            Log.i("SENSOR", "TYPE_MAGNETIC_FIELD available.");
+        } else {
+            Log.e("SENSOR", "TYPE_MAGNETIC_FIELD not available.");
+        }
     }
 
     /**
