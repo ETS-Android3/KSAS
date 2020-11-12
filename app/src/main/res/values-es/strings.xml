@@ -34,4 +34,12 @@
     <string name="blocking_set_1">Set de Bloqueos 1</string>
     <string name="start">Start</string>
     <string name="practice_set">Practicing Blocking Set I</string>
+    <string name="acceleration_not_available">ACCELEROMETER no disponible.</string>
+    <string name="gravity_not_available">GRAVITY no disponible.</string>
+    <string name="gyroscope_not_available">GYROSCOPE no disponible.</string>
+    <string name="linear_acceleration_not_available">LINEAR_ACCELERATION no disponible.</string>
+    <string name="game_rotation_vector_not_available">GAME_ROTATION_VECTOR no disponible.</string>
+    <string name="magnetic_field_not_available">MAGNETIC_FIELD no disponible.</string>
+    <string name="application_may_not_recognize">La aplicación podría no reconocer los movimientos correctamente.</string>
+    <string name="all_sensors_ok">Todos los sensores están funcionando correctamente.</string>
 </resources>

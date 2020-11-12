@@ -33,4 +33,12 @@
     <string name="next">Next</string>
     <string name="start">Start</string>
     <string name="practice_set">Practicing Blocking Set I</string>
+    <string name="acceleration_not_available">ACCELEROMETER not available.</string>
+    <string name="gravity_not_available">GRAVITY not available.</string>
+    <string name="gyroscope_not_available">GYROSCOPE not available.</string>
+    <string name="linear_acceleration_not_available">LINEAR_ACCELERATION not available.</string>
+    <string name="game_rotation_vector_not_available">GAME_ROTATION_VECTOR not available.</string>
+    <string name="magnetic_field_not_available">MAGNETIC_FIELD not available.</string>
+    <string name="application_may_not_recognize">The application may not recognize the movements properly.</string>
+    <string name="all_sensors_ok">All sensors are working correctly.</string>
 </resources>

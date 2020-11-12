@@ -18,6 +18,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/warningText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/welcome"
+        android:gravity="center"
+        android:textSize="10sp"
+        android:textColor="#FF0000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/imageWearable"
+        app:layout_constraintStart_toStartOf="@+id/imageWearable"
+        app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
+
     <ImageView
         android:id="@+id/imageWearable"
         android:layout_width="320dp"
