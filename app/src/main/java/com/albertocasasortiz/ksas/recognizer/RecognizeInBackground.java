@@ -350,7 +350,8 @@ public class RecognizeInBackground extends AsyncTask<Void, Void, Boolean> implem
             this.recordingData = false;
             // Don't receive any more updates from either sensor.
             sensorManager.unregisterListener(this);
-
+            // Fill empty due to lack of sensor.
+            this.sensorsInfo.fillEmptyArrays();
             // List of string to store the data.
             List<String> dataFromSensors = new LinkedList<>();
             // Add each row to file.

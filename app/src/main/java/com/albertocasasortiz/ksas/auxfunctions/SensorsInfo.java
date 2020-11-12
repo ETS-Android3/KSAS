@@ -183,4 +183,46 @@ public class SensorsInfo {
         array = Mathematics.getMovementFromSequence(array);
         return array;
     }
+
+    public void fillEmptyArrays() {
+        int lowestArrSize = this.getLowestArraySize();
+        for(int i = 0; i < lowestArrSize; i++) {
+            if (accelerometerSequence.size() < lowestArrSize) {
+                accelerometerSequence.add(new float[3]);
+                accelerometerSequence.get(i)[0] = 0;
+                accelerometerSequence.get(i)[1] = 0;
+                accelerometerSequence.get(i)[2] = 0;
+            }
+            if (gravitySequence.size() < lowestArrSize) {
+                gravitySequence.add(new float[3]);
+                gravitySequence.get(i)[0] = 0;
+                gravitySequence.get(i)[1] = 0;
+                gravitySequence.get(i)[2] = 0;
+            }
+            if (gyroscopeSequence.size() < lowestArrSize) {
+                gyroscopeSequence.add(new float[3]);
+                gyroscopeSequence.get(i)[0] = 0;
+                gyroscopeSequence.get(i)[1] = 0;
+                gyroscopeSequence.get(i)[2] = 0;
+            }
+            if (linearAccelerationSequence.size() < lowestArrSize) {
+                linearAccelerationSequence.add(new float[3]);
+                linearAccelerationSequence.get(i)[0] = 0;
+                linearAccelerationSequence.get(i)[1] = 0;
+                linearAccelerationSequence.get(i)[2] = 0;
+            }
+            if (gameRotationVectorSequence.size() < lowestArrSize) {
+                gameRotationVectorSequence.add(new float[3]);
+                gameRotationVectorSequence.get(i)[0] = 0;
+                gameRotationVectorSequence.get(i)[1] = 0;
+                gameRotationVectorSequence.get(i)[2] = 0;
+            }
+            if (magneticFieldSequence.size() < lowestArrSize) {
+                magneticFieldSequence.add(new float[3]);
+                magneticFieldSequence.get(i)[0] = 0;
+                magneticFieldSequence.get(i)[1] = 0;
+                magneticFieldSequence.get(i)[2] = 0;
+            }
+        }
+    }
 }
