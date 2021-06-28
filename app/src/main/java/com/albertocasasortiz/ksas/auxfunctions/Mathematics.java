@@ -33,7 +33,7 @@ public class Mathematics {
     }
 
     /**
-     * Get a portion of the aray that contains a movement. The movement is detected over the
+     * Get a portion of the array that contains a movement. The movement is detected over the
      * gyroscope data, obtaining the sum of the abs value of its three coordinates, and getting
      * the window of the sequence that maximizes it. The size is always the maximum allowed by the
      * ml model, and it is 56.

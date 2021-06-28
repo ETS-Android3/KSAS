@@ -39,7 +39,6 @@ public class ActivityFunctions {
      * @param blockTillEnd Establish to true if you want the thread to be blocked till the speech
      *                     ends.
      */
-    @SuppressWarnings("StatementWithEmptyBody")
     public static void speak(String text, TextToSpeech tts, boolean blockTillEnd){
         // If already speaking, stop.
         if(tts.isSpeaking())

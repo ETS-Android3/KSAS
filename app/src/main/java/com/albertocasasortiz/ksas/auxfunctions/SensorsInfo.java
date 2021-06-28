@@ -34,10 +34,10 @@ public class SensorsInfo {
 
     /**
      * Add a reading to accelerometer array.
-     * @param accelerometterSequence Reading of accelerometer.
+     * @param accelerometerSequence Reading of accelerometer.
      */
-    public void addAccelerometerReading(float[] accelerometterSequence){
-        this.accelerometerSequence.add(accelerometterSequence);
+    public void addAccelerometerReading(float[] accelerometerSequence){
+        this.accelerometerSequence.add(accelerometerSequence);
     }
 
     /**
@@ -184,6 +184,9 @@ public class SensorsInfo {
         return array;
     }
 
+    /**
+     * Fill arrays of unavailable sensors with the value 0.
+     */
     public void fillEmptyArrays() {
         int lowestArrSize = this.getLowestArraySize();
         for(int i = 0; i < lowestArrSize; i++) {

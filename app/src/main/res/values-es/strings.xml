@@ -42,4 +42,5 @@
     <string name="magnetic_field_not_available">MAGNETIC_FIELD no disponible.</string>
     <string name="application_may_not_recognize">La aplicación podría no reconocer los movimientos correctamente.</string>
     <string name="all_sensors_ok">Todos los sensores están funcionando correctamente.</string>
+    <string name="default_sensor_not_available">El siguiente sensor no se reconoce: </string>
 </resources>

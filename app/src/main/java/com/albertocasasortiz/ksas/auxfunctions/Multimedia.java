@@ -17,7 +17,6 @@ public class Multimedia {
      * @param activity Activity where the sound is played.
      * @param soundFile Sound file from R.raw.
      */
-    @SuppressWarnings("StatementWithEmptyBody")
     public static void playSound(AppCompatActivity activity, int soundFile){
         //Initialize media player.
         MediaPlayer mp = MediaPlayer.create(activity.getApplicationContext(), soundFile);
