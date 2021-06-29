@@ -11,7 +11,7 @@ import com.albertocasasortiz.ksas.recognizer.KSAS;
 /**
  * Fourth activity of the app, captures the data of the execution and gives feedback.
  */
-public class BS1Assistant extends ActivityFullScreenSpeecher {
+public class ActivityLearningBlockingSetI extends ActivityFullScreenSpeecher {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -23,7 +23,7 @@
         </activity>
         <activity android:name=".activity.ActivitySelectionSets" />
         <activity android:name=".activity.ActivityBlockingSet1" />
-        <activity android:name=".activity.BS1Assistant" />
+        <activity android:name=".activity.ActivityLearningBlockingSetI" />
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.BS1Assistant">
+    tools:context=".activity.ActivityLearningBlockingSetI">
 
     <TextView
         android:id="@+id/practiceTitle"

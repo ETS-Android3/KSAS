@@ -39,7 +39,7 @@ public class ActivityBlockingSet1 extends ActivityFullScreenSpeecher {
             super.tts.stop();
         }
         // Intent to next activity.
-        Intent myIntent = new Intent(this, BS1Assistant.class);
+        Intent myIntent = new Intent(this, ActivityLearningBlockingSetI.class);
         this.startActivity(myIntent);
     }
 }
