@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.albertocasasortiz.ksas.R;
 import com.albertocasasortiz.ksas.activity.parent.ActivityFullScreenSpeecher;
-import com.albertocasasortiz.ksas.recognizer.RecognizeInBackground;
+import com.albertocasasortiz.ksas.recognizer.KSAS;
 
 
 /**
@@ -17,7 +17,7 @@ public class BS1Assistant extends ActivityFullScreenSpeecher {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bs1_assistant);
-        //Instantiate the speecher.
+        //Instantiate the speecher and give initial indications.
         instantiateSpeech(getString(R.string.follow_instructions));
     }
 
@@ -26,8 +26,10 @@ public class BS1Assistant extends ActivityFullScreenSpeecher {
      * @param view View of the gui.
      */
     public void onClickStart(View view) {
-        RecognizeInBackground rb = new RecognizeInBackground(this, super.tts);
-        rb.execute();
+        // Call to ksas, so it executes the capture, model,
+        // analysis and feedback in a background thread.
+        KSAS ksas = new KSAS(this, super.tts);
+        ksas.execute();
     }
 
 

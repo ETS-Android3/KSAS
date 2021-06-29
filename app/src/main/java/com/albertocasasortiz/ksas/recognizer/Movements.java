@@ -8,5 +8,7 @@ package com.albertocasasortiz.ksas.recognizer;
  * The rest of enumerations correspond with the executed movements.
  */
 public enum Movements {
-    NO_RECOGNIZED, UPWARD_BLOCK, INWARD_BLOCK, OUTWARD_EXTENDED_BLOCK, DOWNWARD_OUTWARD_BLOCK, REAR_ELBOW_BLOCK, NO_MOVEMENT, WRONG_MOVEMENT
+    NO_RECOGNIZED, UPWARD_BLOCK, INWARD_BLOCK, OUTWARD_EXTENDED_BLOCK,
+    DOWNWARD_OUTWARD_BLOCK, REAR_ELBOW_BLOCK, NO_MOVEMENT, WRONG_MOVEMENT
 }
+
