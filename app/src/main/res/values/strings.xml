@@ -42,4 +42,5 @@
     <string name="application_may_not_recognize">The application may not recognize the movements properly.</string>
     <string name="all_sensors_ok">All sensors are working correctly.</string>
     <string name="default_sensor_not_available">The following sensor is not recognized: </string>
+    <string name="stop">Stop</string>
 </resources>

@@ -13,26 +13,36 @@ import com.albertocasasortiz.ksas.recognizer.KSAS;
  */
 public class ActivityLearningBlockingSetI extends ActivityFullScreenSpeecher {
 
+    /**
+     * KSAS object, containing all classes and element to deal with learning.
+     */
+    KSAS ksas;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bs1_assistant);
         //Instantiate the speecher and give initial indications.
         instantiateSpeech(getString(R.string.follow_instructions));
+        // Instantiae ksas, so it can execute the capture, model,
+        // analysis and feedback in a background thread.
+        ksas = new KSAS(this, super.tts);
     }
 
     /**
-     * On click start, start lifecycle.
+     * On click start, start lifecycle of KSAS.
      * @param view View of the gui.
      */
     public void onClickStart(View view) {
-        // Call to ksas, so it executes the capture, model,
-        // analysis and feedback in a background thread.
-        KSAS ksas = new KSAS(this, super.tts);
-        ksas.execute();
+        ksas.start();
     }
 
-
-
-
+    /**
+     * On click stop, stop lifecycle of KSAS.
+     * @param view
+     */
+    public void onClickStop(View view) {
+        ksas.stop();
+        finish();
+    }
 }

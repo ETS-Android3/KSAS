@@ -337,4 +337,18 @@ public class KSAS extends AsyncTask<Void, Void, Boolean> implements SensorEventL
         else return Movements.WRONG_MOVEMENT;
     }
 
+    /**
+     * Stops execution of the background task.
+     */
+    public void stop() {
+        this.finish = true;
+        this.cancel(true);
+    }
+
+    /**
+     * Starts execution of the background task.
+     */
+    public void start() {
+        this.execute();
+    }
 }
