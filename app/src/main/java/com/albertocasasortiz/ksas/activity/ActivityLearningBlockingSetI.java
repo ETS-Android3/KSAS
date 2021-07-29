@@ -2,9 +2,11 @@ package com.albertocasasortiz.ksas.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.VideoView;
 
 import com.albertocasasortiz.ksas.R;
 import com.albertocasasortiz.ksas.activity.parent.ActivityFullScreenSpeecher;
+import com.albertocasasortiz.ksas.auxfunctions.Multimedia;
 import com.albertocasasortiz.ksas.recognizer.KSAS;
 
 
@@ -18,6 +20,8 @@ public class ActivityLearningBlockingSetI extends ActivityFullScreenSpeecher {
      */
     KSAS ksas;
 
+    VideoView videoView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,9 @@ public class ActivityLearningBlockingSetI extends ActivityFullScreenSpeecher {
         // Instantiae ksas, so it can execute the capture, model,
         // analysis and feedback in a background thread.
         ksas = new KSAS(this, super.tts);
+
+        // Initialize video.
+        videoView = Multimedia.initializeVideo(videoView, this, R.raw.a_start, R.id.videoAssistant);
     }
 
     /**
@@ -34,12 +41,12 @@ public class ActivityLearningBlockingSetI extends ActivityFullScreenSpeecher {
      * @param view View of the gui.
      */
     public void onClickStart(View view) {
-        ksas.start();
+        ksas.start(this.videoView);
     }
 
     /**
      * On click stop, stop lifecycle of KSAS.
-     * @param view
+     * @param view View of the gui.
      */
     public void onClickStop(View view) {
         ksas.stop();

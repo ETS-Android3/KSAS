@@ -26,7 +26,7 @@ public class ActivityBlockingSet1 extends ActivityFullScreenSpeecher {
         super.instantiateSpeech(getString(R.string.blocking_set_I_introduction));
 
         // Initialize video.
-        Multimedia.initializeVideo(this, R.raw.blocks, R.id.videoSet);
+        Multimedia.initializeVideo(this, R.raw.fullset, R.id.videoSet);
     }
 
     /**

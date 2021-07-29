@@ -10,6 +10,7 @@ import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.speech.tts.TextToSpeech;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,7 +32,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class KSAS extends AsyncTask<Void, Void, Boolean> implements SensorEventListener, MCMARR {
+public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorEventListener, MCMARR {
     // TODO fix possible memory leak. Only solution I see is to propagate
     // the variable everywhere, so I keep this here.
     // Activity in which the task is being executed.
@@ -63,6 +64,10 @@ public class KSAS extends AsyncTask<Void, Void, Boolean> implements SensorEventL
 
     // Determines if an execution has finished.
     private boolean finish;
+
+    // VideoView Video view for showing the video.
+    @SuppressLint("StaticFieldLeak")
+    private VideoView videoView;
 
     public KSAS(AppCompatActivity activity, TextToSpeech tts) {
         // Instantiate activity.
@@ -102,21 +107,27 @@ public class KSAS extends AsyncTask<Void, Void, Boolean> implements SensorEventL
     @Override
     public void giveIndications() {
         if(current_movement == Movements.NO_MOVEMENT) {
+            publishProgress(current_movement);
             ActivityFunctions.speak(activity.getString(R.string.upward_block), tts, true);
         }
         if(current_movement == Movements.UPWARD_BLOCK) {
+            publishProgress(current_movement);
             ActivityFunctions.speak(activity.getString(R.string.inward_block), tts, true);
         }
         if(current_movement == Movements.INWARD_BLOCK) {
+            publishProgress(current_movement);
             ActivityFunctions.speak(activity.getString(R.string.outward_extended_block), tts, true);
         }
         if(current_movement == Movements.OUTWARD_EXTENDED_BLOCK) {
+            publishProgress(current_movement);
             ActivityFunctions.speak(activity.getString(R.string.downward_outward_block), tts, true);
         }
         if(current_movement == Movements.DOWNWARD_OUTWARD_BLOCK) {
+            publishProgress(current_movement);
             ActivityFunctions.speak(activity.getString(R.string.rear_elbow_block), tts, true);
         }
         if(current_movement == Movements.REAR_ELBOW_BLOCK) {
+            publishProgress(current_movement);
             ActivityFunctions.speak(activity.getString(R.string.errors_commited) + " " + errors + " " + activity.getString(R.string.errors), tts, true);
         }
     }
@@ -348,7 +359,30 @@ public class KSAS extends AsyncTask<Void, Void, Boolean> implements SensorEventL
     /**
      * Starts execution of the background task.
      */
-    public void start() {
+    public void start(VideoView videoView) {
+        this.videoView = videoView;
         this.execute();
+    }
+
+    @Override
+    protected void onProgressUpdate(Movements... values) {
+        if(values[0] == Movements.NO_MOVEMENT) {
+            Multimedia.changeVideo(videoView, this.activity, R.raw.b_up, R.id.videoAssistant);
+        }
+        if(values[0] == Movements.UPWARD_BLOCK) {
+            Multimedia.changeVideo(videoView, this.activity, R.raw.c_inner, R.id.videoAssistant);
+        }
+        if(values[0] == Movements.INWARD_BLOCK) {
+            Multimedia.changeVideo(videoView, this.activity, R.raw.d_outer, R.id.videoAssistant);
+        }
+        if(values[0] == Movements.OUTWARD_EXTENDED_BLOCK) {
+            Multimedia.changeVideo(videoView, this.activity, R.raw.e_down, R.id.videoAssistant);
+        }
+        if(values[0] == Movements.DOWNWARD_OUTWARD_BLOCK) {
+            Multimedia.changeVideo(videoView, this.activity, R.raw.f_elbow, R.id.videoAssistant);
+        }
+        if(values[0] == Movements.REAR_ELBOW_BLOCK) {
+            Multimedia.changeVideo(videoView, this.activity, R.raw.a_start, R.id.videoAssistant);
+        }
     }
 }

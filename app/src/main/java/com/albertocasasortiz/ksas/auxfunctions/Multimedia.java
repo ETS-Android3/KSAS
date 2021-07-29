@@ -37,12 +37,13 @@ public class Multimedia {
     public static void initializeVideo(AppCompatActivity activity, int videoName, int viewId){
         // Get videoView from gui.
         VideoView videoView = activity.findViewById(viewId);
+
         // Prepare the video, set looping true, and automatic start.
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                mp.start();
                 mp.setLooping(true);
+                mp.start();
             }
         });
         // Attach video URI to videoView.
@@ -56,4 +57,52 @@ public class Multimedia {
         mediaController.setAnchorView(videoView);
     }
 
+    /**
+     * Initialize the video and the media controller.
+     * @param videoView VideoView where the video is played.
+     * @param activity Activity where the video is played.
+     * @param videoName Reference to the video in R.raw.
+     * @param viewId Reference to the view id in R.id.
+     */
+    public static VideoView initializeVideo(VideoView videoView, AppCompatActivity activity, int videoName, int viewId){
+        // Get videoView from gui.
+        videoView = activity.findViewById(viewId);
+
+        // Prepare the video, set looping true, and automatic start.
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);
+                mp.start();
+            }
+        });
+        // Attach video URI to videoView.
+        String videoPath = "android.resource://" + activity.getPackageName() + "/" + videoName;
+        Uri uri = Uri.parse(videoPath);
+        videoView.setVideoURI(uri);
+
+        // Create mediaController and set size.
+        MediaController mediaController = new MediaController(activity);
+        videoView.setMediaController(mediaController);
+        mediaController.setAnchorView(videoView);
+
+        return videoView;
+    }
+
+    public static void changeVideo(VideoView videoView, AppCompatActivity activity, int videoName, int viewId){
+        // Stop videoView.
+        videoView.stopPlayback();
+        // Attach video URI to videoView.
+        String videoPath = "android.resource://" + activity.getPackageName() + "/" + videoName;
+        Uri uri = Uri.parse(videoPath);
+        videoView.setVideoURI(uri);
+        // Prepare the video, set looping true, and automatic start.
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.setLooping(true);
+                mp.start();
+            }
+        });
+    }
 }

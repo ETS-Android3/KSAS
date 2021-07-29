@@ -26,7 +26,7 @@ public class ActivitySelectionSets extends ActivityFullScreenSpeecher {
         this.instantiateSpeech(getString(R.string.set_selection_question) + ". ");
 
         // Initialize video.
-        Multimedia.initializeVideo(this, R.raw.blocks, R.id.videoSelection);
+        Multimedia.initializeVideo(this, R.raw.preview, R.id.videoSelection);
     }
 
     /**
