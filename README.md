@@ -4,7 +4,7 @@ An application for assisting the learning of American Kenpo Karate's Blocking Se
 
 ## Model
 
-The application already comes with a tensorflow lite model trained. This model was trained using a dataset composed of 240 movements captured from 20 subjects. The model used consists in a LSTM and the code used for training it can be found in this [link](https://github.com/AlbertoCasasOrtiz/Martial-Arts-Movements-Classifier). The LSTM achieved 100% of accuracy in the training set and 94% of accuracy in the testing set.
+The application already comes with a tensorflow lite model trained that can be found in this [link](https://github.com/AlbertoCasasOrtiz/KSAS/blob/master/app/src/main/assets/model.tflite). This model was trained using a dataset composed of 240 movements captured from 20 subjects. The model used consists in a LSTM and the code used for training it can be found in this [link](https://github.com/AlbertoCasasOrtiz/Martial-Arts-Movements-Classifier). The LSTM achieved 100% of accuracy in the training set and 94% of accuracy in the testing set.
 
 ## KSAS Instructions
 
