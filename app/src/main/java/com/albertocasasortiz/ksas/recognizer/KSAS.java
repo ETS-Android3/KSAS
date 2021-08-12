@@ -2,12 +2,14 @@ package com.albertocasasortiz.ksas.recognizer;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -15,6 +17,7 @@ import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.albertocasasortiz.ksas.R;
+import com.albertocasasortiz.ksas.activity.ActivityReport;
 import com.albertocasasortiz.ksas.auxfunctions.ActivityFunctions;
 import com.albertocasasortiz.ksas.auxfunctions.Mathematics;
 import com.albertocasasortiz.ksas.auxfunctions.Msg;
@@ -24,25 +27,31 @@ import com.albertocasasortiz.ksas.auxfunctions.Vibration;
 
 import org.tensorflow.lite.Interpreter;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorEventListener, MCMARR {
     // TODO fix possible memory leak. Only solution I see is to propagate
     // the variable everywhere, so I keep this here.
     // Activity in which the task is being executed.
     @SuppressLint("StaticFieldLeak")
-    private AppCompatActivity activity;
+    private final AppCompatActivity activity;
 
     // Manager for sensor reading.
-    private SensorManager sensorManager;
+    private final SensorManager sensorManager;
     // Class to store sensor info.
-    private SensorsInfo sensorsInfo;
+    private final SensorsInfo sensorsInfo;
     // Delay of sensor readings.
     private static final int SENSOR_DELAY = SensorManager.SENSOR_DELAY_GAME;
     // Boolean that indicates if the sensors are reading data.
@@ -56,11 +65,8 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
     // Indicates which is the current movement.
     private Movements current_movement;
 
-    // Stores number of errors.
-    private int errors;
-
     // Toast for showing messages to the user.
-    private Toast toast;
+    private final Toast toast;
 
     // Determines if an execution has finished.
     private boolean finish;
@@ -69,6 +75,10 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
     @SuppressLint("StaticFieldLeak")
     private VideoView videoView;
 
+    // Register any error committed by the user.
+    private final ErrorsCommitted errorsCommitted;
+
+    // TODO This default constructor is deprecated now.
     public KSAS(AppCompatActivity activity, TextToSpeech tts) {
         // Instantiate activity.
         this.activity = activity;
@@ -93,7 +103,9 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
 
         // Initial values of movements.
         current_movement = Movements.NO_MOVEMENT;
-        this.errors = 0;
+
+        // Initialize errors committed
+        errorsCommitted = new ErrorsCommitted();
 
         // When activity starts, it is not recording data.
         this.recordingData = false;
@@ -128,7 +140,7 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
         }
         if(current_movement == Movements.REAR_ELBOW_BLOCK) {
             publishProgress(current_movement);
-            ActivityFunctions.speak(activity.getString(R.string.errors_commited) + " " + errors + " " + activity.getString(R.string.errors), tts, true);
+            ActivityFunctions.speak(activity.getString(R.string.errors_commited) + " " + errorsCommitted.getTotalNumberOfErrors() + " " + activity.getString(R.string.errors), tts, true);
         }
     }
 
@@ -161,7 +173,7 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
             Vibration.vibrate(this.activity, 500);
             Multimedia.playSound(this.activity, R.raw.wrong_movement);
             ActivityFunctions.speak(activity.getString(R.string.wrong_movement), tts, true);
-            errors++;
+            errorsCommitted.addError(current_movement);
         } else {
             ActivityFunctions.speak(activity.getString(R.string.error), tts, true);
         }
@@ -237,13 +249,94 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
             giveFeedback(recognizedMovement);
         }
         // Give final indications. Reports would be here.
-        ActivityFunctions.speak(activity.getString(R.string.errors_commited) + " " + errors + " " + activity.getString(R.string.errors), tts, true);
+        ActivityFunctions.speak(activity.getString(R.string.errors_commited) + " " + errorsCommitted.getTotalNumberOfErrors() + " " + activity.getString(R.string.errors), tts, true);
+
+        // Save errors in file.
+        if (isExternalStorageWritable()) {
+            // Get date and time to set the name.
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.CANADA);
+            Date date = new Date();
+
+            // First, lest save training session.
+                // Construct fileName.
+                String fileName = "trainingSession" + " - " + dateFormat.format(date);
+
+                // List of string to store the data.
+                List<String> dataToStore = errorsCommitted.getAsListOfStrings();
+
+                // Add header at beggining
+                dataToStore.add(0, "Movements, Errors");
+
+                // String with the format of the saved file.
+                String fileFormat = ".csv";
+
+                // Save data
+                saveDataInExternalStorage(activity, fileName + fileFormat, dataToStore, false);
+
+            // Now, lest save errors per day.
+                // Construct fileName.
+                fileName = "trainingErrors";
+
+                // Generate content
+                dataToStore.clear();
+                dataToStore.add(dateFormat.format(date) + ", " + errorsCommitted.getTotalNumberOfErrors());
+
+                // Save data
+                saveDataInExternalStorage(activity, fileName + fileFormat, dataToStore, true);
+        }
 
         return true;
     }
 
+    /**
+     * Check if external storage is available for write data.
+     * @return True if external storage is available.
+     */
+    private boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state);
+    }
 
-
+    /**
+     * Save data contained in a String in the external storage.
+     * @param context  Context of the activity.
+     * @param fileName Name of the file.
+     * @param body     Body of message (As array of strings).
+     * @param append   Append to file or not.
+     */
+    private void saveDataInExternalStorage(Context context, String fileName, List<String> body, boolean append) {
+        try {
+            // Set folder where save data.
+            // String with the path of the files.
+            String pathFolder = "KSAS training sessions/";
+            File root = new File(context.getExternalFilesDir(null), pathFolder);
+            // Create directory if not exists.
+            boolean created = true;
+            if (!root.exists()) {
+                created = root.mkdir();
+            }
+            if(root.exists() && created) {
+                // If directory created...
+                // Create file object.
+                File gpxfile = new File(root, fileName);
+                // Create file writer.
+                FileWriter writer = new FileWriter(gpxfile, append);
+                // Write data.
+                for (int i = 0; i < body.size(); i++) {
+                    writer.append(body.get(i));
+                    writer.append("\n");
+                }
+                writer.flush();
+                writer.close();
+                //Msg.showToast(context, toast, "Data saved in file: " + fileName, Toast.LENGTH_SHORT);
+                this.sensorsInfo.clear();
+            } else {
+                //Msg.showToast(context, toast, "Could not create directory..", Toast.LENGTH_SHORT);
+            }
+        } catch (IOException e) {
+            //Msg.showToast(context, toast, "Error saving data in file.", Toast.LENGTH_SHORT);
+        }
+    }
 
     /**
      * Load the model file and return as mappedbytebuffer.
@@ -384,5 +477,16 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
         if(values[0] == Movements.REAR_ELBOW_BLOCK) {
             Multimedia.changeVideo(videoView, this.activity, R.raw.a_start, R.id.videoAssistant);
         }
+    }
+
+    @Override
+    protected void onPostExecute(Boolean aBoolean) {
+        // If the tts is speaking, wait.
+        //TODO Implement this properly
+        while (tts.isSpeaking()) {}
+
+        // Intent to next activity.
+        Intent myIntent = new Intent(activity, ActivityReport.class);
+        activity.startActivity(myIntent);
     }
 }
