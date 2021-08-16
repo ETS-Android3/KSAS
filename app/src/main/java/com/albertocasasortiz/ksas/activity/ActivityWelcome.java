@@ -19,11 +19,9 @@ import java.util.Arrays;
  * First activity of the app. Welcome the user and ask him to use the device as wearable.
  */
 public class ActivityWelcome extends ActivityFullScreenSpeecher {
-    // Manager for sensor reading.
-    private SensorManager sensorManager;
 
     // List of required sensors.
-    private static ArrayList<Integer> requiredSensors = new ArrayList<>(Arrays.asList(Sensor.TYPE_ACCELEROMETER,
+    private static final ArrayList<Integer> requiredSensors = new ArrayList<>(Arrays.asList(Sensor.TYPE_ACCELEROMETER,
             Sensor.TYPE_GRAVITY, Sensor.TYPE_GYROSCOPE, Sensor.TYPE_LINEAR_ACCELERATION,
             Sensor.TYPE_GAME_ROTATION_VECTOR, Sensor.TYPE_MAGNETIC_FIELD));
 
@@ -45,7 +43,8 @@ public class ActivityWelcome extends ActivityFullScreenSpeecher {
                 + getString(R.string.attach_phone));
 
         // Initialize sensor manager.
-        this.sensorManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
+        // Manager for sensor reading.
+        SensorManager sensorManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
         warningText = (TextView)findViewById(R.id.warningText);
         String warningMessage = "";
 

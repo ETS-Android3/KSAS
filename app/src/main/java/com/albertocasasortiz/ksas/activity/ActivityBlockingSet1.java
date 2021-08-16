@@ -1,9 +1,14 @@
 package com.albertocasasortiz.ksas.activity;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
 import android.view.View;
 
+import com.albertocasasortiz.ksas.BuildConfig;
 import com.albertocasasortiz.ksas.R;
 import com.albertocasasortiz.ksas.activity.parent.ActivityFullScreenSpeecher;
 import com.albertocasasortiz.ksas.auxfunctions.Multimedia;
@@ -27,6 +32,11 @@ public class ActivityBlockingSet1 extends ActivityFullScreenSpeecher {
 
         // Initialize video.
         Multimedia.initializeVideo(this, R.raw.fullset, R.id.videoSet);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+            Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+            startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
+        }
     }
 
     /**

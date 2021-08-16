@@ -8,17 +8,17 @@ import java.util.ArrayList;
  */
 public class SensorsInfo {
     /** Total acceleration recorded by accelerometer. */
-    private ArrayList<float[]> accelerometerSequence;
+    private final ArrayList<float[]> accelerometerSequence;
     /** Gravity recorded by accelerometer. */
-    private ArrayList<float[]> gravitySequence;
+    private final ArrayList<float[]> gravitySequence;
     /** Amount of turn recorded by gyroscope. */
-    private ArrayList<float[]> gyroscopeSequence;
+    private final ArrayList<float[]> gyroscopeSequence;
     /** Linear acceleration (acc - grav) recorded by accelerometer. */
-    private ArrayList<float[]> linearAccelerationSequence;
+    private final ArrayList<float[]> linearAccelerationSequence;
     /** Game rotation vector. */
-    private ArrayList<float[]> gameRotationVectorSequence;
+    private final ArrayList<float[]> gameRotationVectorSequence;
     /** Magnetic field recorded by magnetometer. */
-    private ArrayList<float[]> magneticFieldSequence;
+    private final ArrayList<float[]> magneticFieldSequence;
 
     /**
      * Constructor of class SensorsInfo.

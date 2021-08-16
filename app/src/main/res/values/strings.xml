@@ -43,4 +43,9 @@
     <string name="all_sensors_ok">All sensors are working correctly.</string>
     <string name="default_sensor_not_available">The following sensor is not recognized: </string>
     <string name="stop">Stop</string>
+    <string name="progress">Progress</string>
+    <string name="number_of_executions">Number of executions:</string>
+    <string name="_0">0</string>
+    <string name="average_num_of_errors">Average num. of errors:</string>
+    <string name="share">Share</string>
 </resources>

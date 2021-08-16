@@ -17,8 +17,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.ActivityReport"
-            android:exported="true" />
-        <activity android:name=".activity.ActivityWelcome">
+            android:exported="true"
+            />
+        <activity
+            android:name=".activity.ActivityWelcome"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />

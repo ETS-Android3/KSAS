@@ -5,7 +5,6 @@ import androidx.core.util.Pair;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class ErrorsCommitted {
     ArrayList<Pair<Movements, Integer>> errors;
@@ -16,14 +15,14 @@ public class ErrorsCommitted {
 
     public void addError(Movements movement) {
         if(errors.isEmpty()) {
-            errors.add(new Pair<Movements, Integer>(movement, 1));
+            errors.add(new Pair<>(movement, 1));
         } else {
             for (int i = 0; i < errors.size(); i++) {
                 if (errors.get(i).first == movement) {
-                    errors.set(i, new Pair<Movements, Integer>(errors.get(i).first, errors.get(i).second + 1));
+                    errors.set(i, new Pair<>(errors.get(i).first, errors.get(i).second + 1));
                     break;
                 } else {
-                    errors.add(new Pair<Movements, Integer>(movement, 1));
+                    errors.add(new Pair<>(movement, 1));
                 }
             }
         }
@@ -52,5 +51,5 @@ public class ErrorsCommitted {
             list.add(pair.first.name() + ", " + pair.second.toString());
         }
         return list;
-    };
+    }
 }

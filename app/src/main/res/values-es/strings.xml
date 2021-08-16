@@ -44,4 +44,8 @@
     <string name="all_sensors_ok">Todos los sensores están funcionando correctamente.</string>
     <string name="default_sensor_not_available">El siguiente sensor no se reconoce: </string>
     <string name="stop">Stop</string>
+    <string name="progress">Progreso</string>
+    <string name="number_of_executions">Numero de ejecuciones:</string>
+    <string name="average_num_of_errors">Num. errores medio:</string>
+    <string name="share">Compartir</string>
 </resources>
