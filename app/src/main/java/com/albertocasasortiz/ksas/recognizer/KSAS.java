@@ -241,13 +241,13 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
     @Override
     protected Boolean doInBackground(Void... voids) {
         // Follow mCMARR framework inside the loop.
-        /*while(!finish()) {
+        while(!finish()) {
             giveIndications();
             captureMovements();
             float[][][] model = modelMovements();
             int recognizedMovement = analyzeMovements(model);
             giveFeedback(recognizedMovement);
-        }*/
+        }
         // Give final indications. Reports would be here.
         ActivityFunctions.speak(activity.getString(R.string.errors_commited) + " " + errorsCommitted.getTotalNumberOfErrors() + " " + activity.getString(R.string.errors), tts, true);
 
