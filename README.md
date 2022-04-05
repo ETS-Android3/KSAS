@@ -26,4 +26,6 @@ In the next Activity, the user is asked to get into the starting position, and t
 This software is licensed under the [AGPL](https://choosealicense.com/licenses/agpl-3.0/) license.
 
 ## Cite
+*Casas-Ortiz, A., & Santos, O. C.* (2021). [KSAS: A Mobile App with Neural Networks to Guide the Learning of Motor Skills.](https://caepia20-21.uma.es/inicio_files/caepia20-21-actas.pdf) In Proceedings of Conference of the Spanish Association of Artificial Intelligence (CAEPIA 20-21) (pp. 997-1000)
+
 *Casas-Ortiz, A., & Santos, O. C.* (2021). [KSAS: An AI Application to learn Martial Arts Movements in on-line Settings.](https://aied2021.science.uu.nl/wp-content/uploads/2021/05/KSAS-An-AI-Application-to-learn-Martial-Arts-Movements-in-on-line-Settings.pdf) In 22nd International Conference on Artificial Intelligence in Education (AIED 2021) (pp. 1-4).
