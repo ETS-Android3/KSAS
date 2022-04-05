@@ -45,7 +45,17 @@
     <string name="stop">Stop</string>
     <string name="progress">Progress</string>
     <string name="number_of_executions">Number of executions:</string>
-    <string name="_0">0</string>
+    <string name="_0" translatable="false">0</string>
     <string name="average_num_of_errors">Average num. of errors:</string>
     <string name="share">Share</string>
+    <string name="feedback_methods">Feedback Methods</string>
+    <string name="visual">Visual</string>
+    <string name="haptic">Haptic</string>
+    <string name="auditive">Auditive</string>
+    <string name="select_feedback">Select the feedback method that will be applied during the training session.</string>
+    <string name="expected_movement">Expected Movement:</string>
+    <string name="executed_movement">Executed Movement:</string>
+    <string name="left_hand">Left arm</string>
+    <string name="right_hand">Right arm</string>
+
 </resources>

@@ -10,7 +10,8 @@ public interface MCMARR {
      */
     boolean finish();
     /**
-     * Give indications to the learner.
+     * Give indications to the learner. This is actually part of te Motion Response phase, but I
+     * have separated it here for clarity.
      */
     void giveIndications();
     /**

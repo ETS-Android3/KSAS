@@ -49,6 +49,7 @@ public class ActivityFunctions {
         }else{
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
         }
+
         //TODO Implement this properly
         // If block till end, block thread.
         if(blockTillEnd) {

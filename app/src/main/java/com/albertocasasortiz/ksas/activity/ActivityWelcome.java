@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * First activity of the app. Welcome the user and ask him to use the device as wearable.
+ * First activity of the app. Welcome the user and ask her/him to use the device as wearable.
  */
 public class ActivityWelcome extends ActivityFullScreenSpeecher {
 

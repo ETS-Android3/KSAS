@@ -78,8 +78,24 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
     // Register any error committed by the user.
     private final ErrorsCommitted errorsCommitted;
 
-    // TODO This default constructor is deprecated now.
-    public KSAS(AppCompatActivity activity, TextToSpeech tts) {
+    boolean left;
+    boolean right;
+    boolean visual;
+    boolean haptic;
+    boolean auditory;
+
+    // TODO This default constructor for AsyncTask is deprecated now.
+    /**
+     * Constructor for the class KSAS.
+     * @param activity Activity of the application that is calling KSAS.
+     * @param tts Text to speeck object.
+     * @param left Left hand is executing the movements.
+     * @param right Right hand is executing the movements.
+     * @param visual Visual feedback is provided.
+     * @param haptic Haptic feedback is provided.
+     * @param auditory Auditory feedback is provided.
+     */
+    public KSAS(AppCompatActivity activity, TextToSpeech tts, boolean left, boolean right, boolean visual, boolean haptic, boolean auditory) {
         // Instantiate activity.
         this.activity = activity;
         // Instantiate tts.
@@ -87,6 +103,13 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
 
         // Initialize toast.
         this.toast = new Toast(this.activity);
+
+        // Get preferences
+        this.left = left;
+        this.right = right;
+        this.visual = visual;
+        this.haptic = haptic;
+        this.auditory = auditory;
 
         // Load tensorflow model.
         try{
@@ -146,32 +169,40 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
 
     @Override
     public void giveFeedback(int recognizedMovement){
+        // Set executed movement in GUI
         if(isCorrectMovement(Movements.values()[recognizedMovement], current_movement) == Movements.UPWARD_BLOCK){
-            Multimedia.playSound(this.activity, R.raw.correct_movement);
+            if(auditory)
+                Multimedia.playSound(this.activity, R.raw.correct_movement);
             ActivityFunctions.speak(activity.getString(R.string.great), tts, true);
             current_movement = Movements.UPWARD_BLOCK;
         } else if(isCorrectMovement(Movements.values()[recognizedMovement], current_movement) == Movements.INWARD_BLOCK) {
-            Multimedia.playSound(this.activity, R.raw.correct_movement);
+            if(auditory)
+                Multimedia.playSound(this.activity, R.raw.correct_movement);
             ActivityFunctions.speak(activity.getString(R.string.thats_it), tts, true);
             current_movement = Movements.INWARD_BLOCK;
         } else if(isCorrectMovement(Movements.values()[recognizedMovement], current_movement) == Movements.OUTWARD_EXTENDED_BLOCK) {
-            Multimedia.playSound(this.activity, R.raw.correct_movement);
+            if(auditory)
+                Multimedia.playSound(this.activity, R.raw.correct_movement);
             ActivityFunctions.speak(activity.getString(R.string.perfect), tts, true);
             current_movement = Movements.OUTWARD_EXTENDED_BLOCK;
         } else if(isCorrectMovement(Movements.values()[recognizedMovement], current_movement) == Movements.DOWNWARD_OUTWARD_BLOCK) {
-            Multimedia.playSound(this.activity, R.raw.correct_movement);
+            if(auditory)
+                Multimedia.playSound(this.activity, R.raw.correct_movement);
             ActivityFunctions.speak(activity.getString(R.string.good_movement), tts, true);
             current_movement = Movements.DOWNWARD_OUTWARD_BLOCK;
         } else if(isCorrectMovement(Movements.values()[recognizedMovement], current_movement) == Movements.REAR_ELBOW_BLOCK) {
-            Multimedia.playSound(this.activity, R.raw.correct_movement);
+            if(auditory)
+                Multimedia.playSound(this.activity, R.raw.correct_movement);
             ActivityFunctions.speak(activity.getString(R.string.finish_set), tts, true);
             current_movement = Movements.REAR_ELBOW_BLOCK;
             finish = true;
         } else if(isCorrectMovement(Movements.values()[recognizedMovement], current_movement) == Movements.NO_RECOGNIZED) {
             ActivityFunctions.speak(activity.getString(R.string.no_recognized), tts, true);
         } else if(isCorrectMovement(Movements.values()[recognizedMovement], current_movement) == Movements.WRONG_MOVEMENT) {
-            Vibration.vibrate(this.activity, 500);
-            Multimedia.playSound(this.activity, R.raw.wrong_movement);
+            if(haptic)
+                Vibration.vibrate(this.activity, 500);
+            if(auditory)
+                Multimedia.playSound(this.activity, R.raw.wrong_movement);
             ActivityFunctions.speak(activity.getString(R.string.wrong_movement), tts, true);
             errorsCommitted.addError(current_movement);
         } else {
@@ -196,7 +227,7 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
     @Override
     public float[][][] modelMovements() {
         // Input shape is [1]
-        float [][][] rawInput = sensorsInfo.asArray();
+        float [][][] rawInput = sensorsInfo.asArray(this.right);
         return Mathematics.EWMA(rawInput);
     }
 
@@ -331,10 +362,10 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
                 //Msg.showToast(context, toast, "Data saved in file: " + fileName, Toast.LENGTH_SHORT);
                 this.sensorsInfo.clear();
             } else {
-                //Msg.showToast(context, toast, "Could not create directory..", Toast.LENGTH_SHORT);
+                Msg.showToast(context, toast, "Could not create directory.", Toast.LENGTH_SHORT);
             }
         } catch (IOException e) {
-            //Msg.showToast(context, toast, "Error saving data in file.", Toast.LENGTH_SHORT);
+            Msg.showToast(context, toast, "Error saving data in file.", Toast.LENGTH_SHORT);
         }
     }
 
@@ -345,7 +376,15 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
      */
     private MappedByteBuffer loadModelFile() throws IOException {
         //TODO The use of MappedByteBuffer for loading the tfmodel is deprecated, update.
-        AssetFileDescriptor fileDescriptor = this.activity.getAssets().openFd("model.tflite");
+        AssetFileDescriptor fileDescriptor;
+        if (left) {
+            fileDescriptor = this.activity.getAssets().openFd("left.tflite");
+        } else if (right) {
+            fileDescriptor = this.activity.getAssets().openFd("right.tflite");
+        } else {
+            //TODO ERROR
+            fileDescriptor = this.activity.getAssets().openFd("right.tflite");
+        }
         FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
         FileChannel fileChannel = inputStream.getChannel();
         long startOffset = fileDescriptor.getStartOffset();
@@ -453,29 +492,36 @@ public class KSAS extends AsyncTask<Void, Movements, Boolean> implements SensorE
      * Starts execution of the background task.
      */
     public void start(VideoView videoView) {
-        this.videoView = videoView;
+        if(visual)
+            this.videoView = videoView;
         this.execute();
     }
 
     @Override
     protected void onProgressUpdate(Movements... values) {
         if(values[0] == Movements.NO_MOVEMENT) {
-            Multimedia.changeVideo(videoView, this.activity, R.raw.b_up, R.id.videoAssistant);
+            if(visual)
+                Multimedia.changeVideo(videoView, this.activity, R.raw.b_up, R.id.videoAssistant);
         }
         if(values[0] == Movements.UPWARD_BLOCK) {
-            Multimedia.changeVideo(videoView, this.activity, R.raw.c_inner, R.id.videoAssistant);
+            if(visual)
+                Multimedia.changeVideo(videoView, this.activity, R.raw.c_inner, R.id.videoAssistant);
         }
         if(values[0] == Movements.INWARD_BLOCK) {
-            Multimedia.changeVideo(videoView, this.activity, R.raw.d_outer, R.id.videoAssistant);
+            if(visual)
+                Multimedia.changeVideo(videoView, this.activity, R.raw.d_outer, R.id.videoAssistant);
         }
         if(values[0] == Movements.OUTWARD_EXTENDED_BLOCK) {
-            Multimedia.changeVideo(videoView, this.activity, R.raw.e_down, R.id.videoAssistant);
+            if(visual)
+                Multimedia.changeVideo(videoView, this.activity, R.raw.e_down, R.id.videoAssistant);
         }
         if(values[0] == Movements.DOWNWARD_OUTWARD_BLOCK) {
-            Multimedia.changeVideo(videoView, this.activity, R.raw.f_elbow, R.id.videoAssistant);
+            if(visual)
+                Multimedia.changeVideo(videoView, this.activity, R.raw.f_elbow, R.id.videoAssistant);
         }
         if(values[0] == Movements.REAR_ELBOW_BLOCK) {
-            Multimedia.changeVideo(videoView, this.activity, R.raw.a_start, R.id.videoAssistant);
+            if(visual)
+                Multimedia.changeVideo(videoView, this.activity, R.raw.a_start, R.id.videoAssistant);
         }
     }
 

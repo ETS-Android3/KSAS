@@ -19,7 +19,7 @@ import java.util.Locale;
 @SuppressLint("Registered")
 public class ActivityFullScreenSpeecher extends AppCompatActivity {
 
-    /** Allows to convert from text to voice.*/
+    // Allows to convert from text to voice.
     protected TextToSpeech tts;
 
     // Toast for showing messages to the user.
