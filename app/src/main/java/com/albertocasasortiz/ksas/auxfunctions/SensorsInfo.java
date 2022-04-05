@@ -155,9 +155,10 @@ public class SensorsInfo {
      * · Dimension 1: Always 1.
      * · Dimension 2: Number of attributes.
      * · Dimension 3: Number of examples per attribute.
+     * @param right Indicate if it is executing right or left hand.
      * @return Data structured as array.
      */
-    public float[][][] asArray(){
+    public float[][][] asArray(boolean right){
         int lowestArrSize = this.getLowestArraySize();
         float[][][] array= new float[1][18][lowestArrSize];
         for(int i = 0; i < lowestArrSize; i++){
@@ -180,7 +181,7 @@ public class SensorsInfo {
             array[0][16][i] = magneticFieldSequence.get(i)[1];
             array[0][17][i] = magneticFieldSequence.get(i)[2];
         }
-        array = Mathematics.getMovementFromSequence(array);
+        array = Mathematics.getMovementFromSequence(array, right);
         return array;
     }
 

@@ -14,7 +14,7 @@ import com.albertocasasortiz.ksas.activity.parent.ActivityFullScreenSpeecher;
 import com.albertocasasortiz.ksas.auxfunctions.Multimedia;
 
 /**
- * Third activity of the app, show a video with an introduction of the set..
+ * Third activity of the app, show a video with an introduction of the set.
  */
 public class ActivityBlockingSet1 extends ActivityFullScreenSpeecher {
 
@@ -49,7 +49,7 @@ public class ActivityBlockingSet1 extends ActivityFullScreenSpeecher {
             super.tts.stop();
         }
         // Intent to next activity.
-        Intent myIntent = new Intent(this, ActivityLearningBlockingSetI.class);
+        Intent myIntent = new Intent(this, ActivitySelectionFeedback.class);
         this.startActivity(myIntent);
     }
 }

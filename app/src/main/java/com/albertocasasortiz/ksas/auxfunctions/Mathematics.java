@@ -6,9 +6,9 @@ package com.albertocasasortiz.ksas.auxfunctions;
 public class Mathematics {
 
     /**
-     * Execute EWMA over a tridimensional matrix and return the resulting sequences.
-     * @param array Arrays to apply ewma.
-     * @return Resulting sequences of applying ewma in the data.
+     * Execute EWMA over a tri-dimensional matrix and return the resulting sequences.
+     * @param array Arrays to apply EWMA.
+     * @return Resulting sequences of applying EWMA in the data.
      */
     public static float[][][] EWMA(float[][][] array){
         int pos = 0;
@@ -38,10 +38,15 @@ public class Mathematics {
      * the window of the sequence that maximizes it. The size is always the maximum allowed by the
      * ml model, and it is 56.
      * @param array Array from which we obtain the movement.
+     * @param right Indicate if it is executing right or left hand.
      * @return Sequence containing the movement.
      */
-    public static float[][][] getMovementFromSequence(float[][][] array){
-        int windowSize = 56;
+    public static float[][][] getMovementFromSequence(float[][][] array, boolean right){
+        int windowSize;
+        if (right)
+            windowSize = 54;
+        else
+            windowSize = 56;
         float max = 0;
         int begin = 0;
         int end = 55;

@@ -48,4 +48,13 @@
     <string name="number_of_executions">Numero de ejecuciones:</string>
     <string name="average_num_of_errors">Num. errores medio:</string>
     <string name="share">Compartir</string>
+    <string name="feedback_methods">Feedback Methods</string>
+    <string name="visual">Visual</string>
+    <string name="haptic">Háptico</string>
+    <string name="auditive">Auditivo</string>
+    <string name="select_feedback">Selecciona los métodos de feedback que se aplicarán durante la sesión de entrenamiento.</string>
+    <string name="expected_movement">Movimiento Esperado:</string>
+    <string name="executed_movement">Movimiento Ejecutado:</string>
+    <string name="left_hand">Brazo izquierdo</string>
+    <string name="right_hand">Brazo derecho</string>
 </resources>

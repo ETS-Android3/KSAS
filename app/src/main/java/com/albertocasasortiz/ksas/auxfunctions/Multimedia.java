@@ -66,12 +66,9 @@ public class Multimedia {
         videoView = activity.findViewById(viewId);
 
         // Prepare the video, set looping true, and automatic start.
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.setLooping(true);
-                mp.start();
-            }
+        videoView.setOnPreparedListener(mp -> {
+            mp.setLooping(true);
+            mp.start();
         });
         // Attach video URI to videoView.
         String videoPath = "android.resource://" + activity.getPackageName() + "/" + videoName;
@@ -94,12 +91,9 @@ public class Multimedia {
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
         // Prepare the video, set looping true, and automatic start.
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.setLooping(true);
-                mp.start();
-            }
+        videoView.setOnPreparedListener(mp -> {
+            mp.setLooping(true);
+            mp.start();
         });
     }
 }

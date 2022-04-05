@@ -16,9 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activity.ActivitySelectionFeedback"
+            android:exported="true" />
+        <activity
             android:name=".activity.ActivityReport"
-            android:exported="true"
-            />
+            android:exported="true" />
         <activity
             android:name=".activity.ActivityWelcome"
             android:exported="true">

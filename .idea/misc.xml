@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Workspaces/Android/KSAS/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.13229166666666667" />
+        <entry key="..\:/Workspaces/Android/KSAS/app/src/main/res/drawable/ic_launcher_background.xml" value="0.13229166666666667" />
+        <entry key="..\:/Workspaces/Android/KSAS/app/src/main/res/layout/activity_blocking_set1.xml" value="0.1015625" />
+        <entry key="..\:/Workspaces/Android/KSAS/app/src/main/res/layout/activity_bs1_assistant.xml" value="0.4" />
+        <entry key="..\:/Workspaces/Android/KSAS/app/src/main/res/layout/activity_main.xml" value="0.11614583333333334" />
         <entry key="..\:/Workspaces/Android/KSAS/app/src/main/res/layout/activity_report.xml" value="0.6" />
+        <entry key="..\:/Workspaces/Android/KSAS/app/src/main/res/layout/activity_selection_feedback.xml" value="0.4" />
+        <entry key="..\:/Workspaces/Android/KSAS/app/src/main/res/layout/activity_set_selection.xml" value="0.11614583333333334" />
       </map>
     </option>
   </component>
